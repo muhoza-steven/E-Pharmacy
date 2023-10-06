@@ -1,0 +1,23 @@
+@startuml
+
+rectangle "Use case name: Login" {
+    note
+    <b>Related requirements:</b> R1, R2
+    <b>Goal in context:</b> A user gets authenticated and receives an authorisation token
+    <b>Preconditions:</b> User must have an account
+    <b>Successful end condition:</b> User receives an authorisation token
+    <b>Failed end condition:</b> No authorisation token received, failure message shown
+    <b>Primary actors:</b> Pharmacist, customer
+    <b>Secondary actors:</b> N/A
+    <b>Trigger:</b> User requests system to authenticate them
+    <b>Main flow:</b> User requests system to authenticate them
+               System presents a login page
+               User enters their credentials
+               Systems checks if entered credentials are found in the system, and if they are correct
+               System returns an authorisation token
+    <b>Extensions:</b> User doesn't have an account, or enters wrong credentials
+                System displays an error message
+    end note
+}
+
+@enduml

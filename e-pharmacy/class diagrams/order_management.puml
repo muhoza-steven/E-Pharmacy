@@ -1,0 +1,21 @@
+@startuml
+skinparam linetype ortho
+
+abstract class ProductContainer {
+    +owner_username: String
+    #products: List
+    +add_product()
+    +remove_product()
+    +view_products()
+}
+
+class Wishlist {}
+
+class ShoppingCart {
+    +checkout()
+}
+
+ProductContainer <|-- Wishlist
+ProductContainer <|-- ShoppingCart
+
+@enduml

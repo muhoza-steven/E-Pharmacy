@@ -1,0 +1,20 @@
+@startuml
+
+rectangle "Use case name: Update catalog" {
+    note
+    <b>Related requirements:</b> R9, R11
+    <b>Goal in context:</b> Updating of some medicine's details in the product catalog
+    <b>Preconditions:</b> N/A
+    <b>Successful end condition:</b> Medicine's details updated
+    <b>Failed end condition:</b> N/A
+    <b>Primary actors:</b> N/A
+    <b>Secondary actors:</b> Pharmacist, customer
+    <b>Trigger:</b> A pharmacist processes a prescription, or a customer checks out
+    <b>Main flow:</b> A pharmacist processes a prescription, or a customer checks out
+               System generates a request to update the product catalog
+               System updates the product catalog
+    <b>Extensions:</b> N/A
+    end note
+}
+
+@enduml

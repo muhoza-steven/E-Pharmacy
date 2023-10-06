@@ -1,0 +1,12 @@
+@startuml
+skinparam linetype ortho
+
+class Reports {
+    +get_current_stock()
+    +get_sales_report()
+    +get_salesperson_report()
+    +get_customer_report()
+    +get_prescriptions()
+}
+
+@enduml

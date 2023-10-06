@@ -1,0 +1,20 @@
+@startuml
+skinparam linetype ortho
+
+class PrescriptionsList {
+    +process_prescription()
+    +view_prescriptions()
+    +add_prescription()
+}
+
+class Prescription {
+    +customer_username: String
+    +fulfilled_by: String
+    +medicine_name: String
+    +quantity: Integer
+    +purchase_approved: Boolean
+}
+
+PrescriptionsList o-- Prescription
+
+@enduml

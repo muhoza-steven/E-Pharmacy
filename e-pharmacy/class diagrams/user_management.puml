@@ -1,0 +1,28 @@
+@startuml
+skinparam linetype ortho
+
+enum Role {
+    Pharmacist
+    Customer
+}
+
+abstract class BaseUser {
+    #role: Role
+    +name: String
+    +username: String
+    +password: String
+    #is_privileged()
+    +register_self()
+    +login()
+}
+
+class Pharmacist {
+    +create_customer_account()
+}
+
+class Customer {}
+
+BaseUser <|-- Pharmacist
+BaseUser <|-- Customer
+
+@enduml

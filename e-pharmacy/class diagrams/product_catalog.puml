@@ -1,0 +1,18 @@
+@startuml
+skinparam linetype ortho
+
+class Catalog {
+    +search()
+    +add_product()
+    +update_product()
+}
+
+class Product {
+    +quantity: Integer
+    +brand: String
+    +active_ingredient: String
+}
+
+Catalog o-- Product
+
+@enduml

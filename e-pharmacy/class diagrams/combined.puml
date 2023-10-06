@@ -1,0 +1,84 @@
+@startuml
+left to right direction
+skinparam linetype ortho
+
+enum Role {
+    Pharmacist
+    Customer
+}
+
+abstract class BaseUser {
+    #role: Role
+    +name: String
+    +username: String
+    +password: String
+    #is_privileged()
+    +register_self()
+    +login()
+}
+
+class Pharmacist {
+    +create_customer_account()
+}
+
+class Customer {}
+
+BaseUser <|-- Pharmacist
+BaseUser <|-- Customer
+
+class Catalog {
+    +search()
+    +add_product()
+    +update_product()
+}
+
+class Product {
+    +quantity: Integer
+    +brand: String
+    +active_ingredient: String
+}
+
+Catalog o-- Product
+
+abstract class ProductContainer {
+    +owner_username: String
+    #products: List
+    +add_product()
+    +remove_product()
+    +view_products()
+}
+
+class Wishlist {}
+
+class ShoppingCart {
+    +checkout()
+}
+
+ProductContainer <|-- Wishlist
+ProductContainer <|-- ShoppingCart
+
+class PrescriptionsList {
+    +process_prescription()
+    +view_prescriptions()
+    +add_prescription()
+}
+
+class Prescription {
+    +customer_username: String
+    +fulfilled_by: String
+    +medicine_name: String
+    +quantity: Integer
+    +purchase_approved: Boolean
+}
+
+PrescriptionsList o-- Prescription
+
+class Reports {
+    +get_current_stock()
+    +get_sales_report()
+    +get_salesperson_report()
+    +get_customer_report()
+    +get_prescriptions()
+}
+
+@enduml

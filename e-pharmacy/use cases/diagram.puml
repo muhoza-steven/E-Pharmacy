@@ -1,0 +1,115 @@
+@startuml
+skinparam linetype ortho
+left to right direction
+
+:Pharmacist: as pharmacist #green
+:Customer: as customer #red
+:Privileged users database: as privileged_users_db
+
+note bottom of pharmacist
+Serves as the admin
+of this system
+end note
+
+note bottom of customer
+Is an unprivileged
+user of this system
+end note
+
+note bottom of privileged_users_db
+Contains a list of
+pharmacists
+end note
+
+package "E-pharmacy" {
+
+    package "User Management" {
+        (User registration) as (user_registration)
+        (Account creation) as (account_creation)
+        (Login) as (login)
+        (Registration failure) as (registration_failure)
+        (Login failure) as (login_failure)
+
+        login <- customer #red;text:red : R1
+        pharmacist --> login #green;text:green : R2
+        pharmacist --> user_registration #green;text:green : R3
+        pharmacist --> account_creation #green;text:green : R4
+        user_registration -> privileged_users_db
+        user_registration ..> registration_failure : <<extend>>
+        login ..> login_failure : <<extend>>
+
+        note top of registration_failure
+        Registration fails when a
+        customer tries to register
+        themselves
+        end note
+
+        note top of login_failure
+        Login fails when a user
+        without an account tries to
+        login, or a registered user
+        enters wrong credentials
+        end note
+
+        note bottom of account_creation
+        Admin creates accounts
+        for unprivileged users
+        end note
+    }
+
+    package "Product Catalog" {
+        (Add a product) as (add_product)
+        (Search a product) as (search_product)
+        (Update catalog) as (update_catalog)
+
+        pharmacist --> add_product #green;text:green : R5
+        pharmacist --> search_product #green;text:green : R6
+        search_product <-- customer #red;text:red : R6
+    }
+
+    package "Prescription Management" {
+        (Add a prescription) as (add_prescription)
+        (View prescriptions) as (view_prescriptions)
+        (Process prescriptions) as (process_prescriptions)
+
+        add_prescription <-- customer #red;text:red : R7
+        pharmacist --> view_prescriptions #green;text:green : R8
+        pharmacist --> process_prescriptions #green;text:green : R9
+        process_prescriptions ..> update_catalog : <<include>>
+
+        note bottom of process_prescriptions
+        Checks if medications on
+        prescription are available,
+        and if so, sells them to the
+        customer
+        end note
+    }
+
+    package "Order Management" {
+        (Add a product to shopping cart) as (add_to_cart)
+        (Checkout) as (checkout)
+        (Create a wishlist) as (create_wishlist)
+
+        add_to_cart <--- customer #red;text:red : R10
+        checkout <--- customer #red;text:red : R11
+        create_wishlist <--- customer #red;text:red : R12
+        update_catalog <.. checkout : <<include>>
+    }
+
+    package "Analytics and Reporting" {
+            (Report on current stock) as (report_stock)
+            (Report on sales) as (report_sales)
+            (Report by salesperson) as (report_salesperson)
+            (Report by customer) as (report_customer)
+            (Report on prescriptions) as (report_prescriptions)
+
+            pharmacist --> report_stock #green;text:green : R13
+            pharmacist --> report_sales #green;text:green : R14
+            pharmacist --> report_salesperson #green;text:green : R15
+            pharmacist --> report_customer #green;text:green : R16
+            pharmacist --> report_prescriptions #green;text:green : R17
+    }
+
+}
+
+@enduml

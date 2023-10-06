@@ -1,0 +1,25 @@
+@startuml
+
+rectangle "Use case name: User registration" {
+    note
+    <b>Related requirements:</b> R3
+    <b>Goal in context:</b> A pharmacist creates their own account
+    <b>Preconditions:</b> Limited to users in the privileged users database
+    <b>Successful end condition:</b> New account created for the pharmacist
+    <b>Failed end condition:</b> No new account created, failure message shown
+    <b>Primary actors:</b> Pharmacist
+    <b>Secondary actors:</b> Privileged users database
+    <b>Trigger:</b> Pharmacist requests system to register a new account
+    <b>Main flow:</b> Pharmacist requests system to register a new account
+               System presents a sign up page
+               Pharmacist enters their details
+               Systems checks if entered details are found in privileged users database
+               If details found, system creates a new account for the pharmacist
+               System displays a success message
+    <b>Extensions:</b> Pharmacist not found in privileged users database
+                System skips creation of a new account
+                System displays an error message
+    end note
+}
+
+@enduml
